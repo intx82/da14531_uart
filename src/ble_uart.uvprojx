@@ -82,7 +82,7 @@
           <AfterMake>
             <RunUserProg1>1</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name>fromelf --bincombined --output=".\out_DA14585\Objects\@L.bin"  "!L"</UserProg1Name>
+            <UserProg1Name>fromelf --bincombined --output=".\out\@L.bin"  "!L"</UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
@@ -1272,14 +1272,14 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>.\out_DA14586\Objects\</OutputDirectory>
-          <OutputName>ble_app_peripheral_586</OutputName>
+          <OutputDirectory>.\out\</OutputDirectory>
+          <OutputName>ble_uart</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
-          <ListingPath>.\out_DA14586\Listings\</ListingPath>
+          <ListingPath>.\out\listings\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
@@ -1306,7 +1306,7 @@
           <AfterMake>
             <RunUserProg1>1</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name>fromelf --bincombined --output=".\out_DA14586\Objects\@L.bin"  "!L"</UserProg1Name>
+            <UserProg1Name>fromelf --bincombined --output=".\out\@L.bin"  "!L"</UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
@@ -2496,14 +2496,14 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>.\out_DA14531\Objects\</OutputDirectory>
+          <OutputDirectory>.\out\</OutputDirectory>
           <OutputName>ble_app_peripheral_531</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
-          <ListingPath>.\out_DA14531\Listings\</ListingPath>
+          <ListingPath>.\out\listings\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
@@ -2530,7 +2530,7 @@
           <AfterMake>
             <RunUserProg1>1</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name>fromelf --bincombined --output=".\out_DA14531\Objects\@L.bin"  "!L"</UserProg1Name>
+            <UserProg1Name>fromelf --bincombined --output=".\out\@L.bin"  "!L"</UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
