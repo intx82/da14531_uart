@@ -3,6 +3,13 @@
 ## Схема
 
 В переходнике используется модуль PAN1740A на базе контроллера DA14585
+<https://na.industrial.panasonic.com/products/wireless-connectivity/bluetooth/lineup/bluetooth-low-energy/series/133809>
+
+* Выводы 5,6 - Uart. Детальнее см.даташит в <doc/247156_fileversion.pdf>
+* Выводы 16,18 - SWD 
+* Вывод 8 - VCC
+* Вывод A,B,C,D,15,17,19 - GND
+* Вывод 2 - RST должен быть соединен с GND
 
 ## Прошивка
 
