@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "*.js": "javascriptreact",
+        "uart_profile.h": "c",
+        "custs1_task.h": "c",
+        "gapc_task.h": "c",
+        "gapm_task.h": "c"
+    }
+}

@@ -24,12 +24,11 @@
  ****************************************************************************************
  */
 
-#include "rwip_config.h"             // SW configuration
+#include "rwip_config.h" // SW configuration
 #include "gap.h"
 #include "app_easy_timer.h"
 #include "user_peripheral.h"
-#include "user_custs1_impl.h"
-#include "user_custs1_def.h"
+#include "uart_profile.h"
 #include "co_bt.h"
 
 /*
@@ -51,17 +50,17 @@ struct mnf_specific_data_ad_structure
  ****************************************************************************************
  */
 
-uint8_t app_connection_idx                      __SECTION_ZERO("retention_mem_area0");
-timer_hnd app_adv_data_update_timer_used        __SECTION_ZERO("retention_mem_area0");
-timer_hnd app_param_update_request_timer_used   __SECTION_ZERO("retention_mem_area0");
+uint8_t app_connection_idx __SECTION_ZERO("retention_mem_area0");
+timer_hnd app_adv_data_update_timer_used __SECTION_ZERO("retention_mem_area0");
+timer_hnd app_param_update_request_timer_used __SECTION_ZERO("retention_mem_area0");
 
 // Retained variables
-struct mnf_specific_data_ad_structure mnf_data  __SECTION_ZERO("retention_mem_area0"); //@RETENTION MEMORY
+struct mnf_specific_data_ad_structure mnf_data __SECTION_ZERO("retention_mem_area0"); //@RETENTION MEMORY
 // Index of manufacturer data in advertising data or scan response data (when MSB is 1)
-uint8_t mnf_data_index                          __SECTION_ZERO("retention_mem_area0"); //@RETENTION MEMORY
-uint8_t stored_adv_data_len                     __SECTION_ZERO("retention_mem_area0"); //@RETENTION MEMORY
-uint8_t stored_scan_rsp_data_len                __SECTION_ZERO("retention_mem_area0"); //@RETENTION MEMORY
-uint8_t stored_adv_data[ADV_DATA_LEN]           __SECTION_ZERO("retention_mem_area0"); //@RETENTION MEMORY
+uint8_t mnf_data_index __SECTION_ZERO("retention_mem_area0");                          //@RETENTION MEMORY
+uint8_t stored_adv_data_len __SECTION_ZERO("retention_mem_area0");                     //@RETENTION MEMORY
+uint8_t stored_scan_rsp_data_len __SECTION_ZERO("retention_mem_area0");                //@RETENTION MEMORY
+uint8_t stored_adv_data[ADV_DATA_LEN] __SECTION_ZERO("retention_mem_area0");           //@RETENTION MEMORY
 uint8_t stored_scan_rsp_data[SCAN_RSP_DATA_LEN] __SECTION_ZERO("retention_mem_area0"); //@RETENTION MEMORY
 
 /*
@@ -76,10 +75,10 @@ uint8_t stored_scan_rsp_data[SCAN_RSP_DATA_LEN] __SECTION_ZERO("retention_mem_ar
  */
 static void mnf_data_init()
 {
-    mnf_data.ad_structure_size = sizeof(struct mnf_specific_data_ad_structure ) - sizeof(uint8_t); // minus the size of the ad_structure_size field
+    mnf_data.ad_structure_size = sizeof(struct mnf_specific_data_ad_structure) - sizeof(uint8_t); // minus the size of the ad_structure_size field
     mnf_data.ad_structure_type = GAP_AD_TYPE_MANU_SPECIFIC_DATA;
-    mnf_data.company_id[0] = APP_AD_MSD_COMPANY_ID & 0xFF; // LSB
-    mnf_data.company_id[1] = (APP_AD_MSD_COMPANY_ID >> 8 )& 0xFF; // MSB
+    mnf_data.company_id[0] = APP_AD_MSD_COMPANY_ID & 0xFF;        // LSB
+    mnf_data.company_id[1] = (APP_AD_MSD_COMPANY_ID >> 8) & 0xFF; // MSB
     mnf_data.proprietary_data[0] = 0;
     mnf_data.proprietary_data[1] = 0;
 }
@@ -98,9 +97,10 @@ static void mnf_data_update()
     mnf_data.proprietary_data[0] = data & 0xFF;
     mnf_data.proprietary_data[1] = (data >> 8) & 0xFF;
 
-    if (data == 0xFFFF) {
-         mnf_data.proprietary_data[0] = 0;
-         mnf_data.proprietary_data[1] = 0;
+    if (data == 0xFFFF)
+    {
+        mnf_data.proprietary_data[0] = 0;
+        mnf_data.proprietary_data[1] = 0;
     }
 }
 
@@ -214,7 +214,7 @@ void user_app_adv_start(void)
     // Schedule the next advertising data update
     app_adv_data_update_timer_used = app_easy_timer(APP_ADV_DATA_UPDATE_TO, adv_data_update_timer_cb);
 
-    struct gapm_start_advertise_cmd* cmd;
+    struct gapm_start_advertise_cmd *cmd;
     cmd = app_easy_gap_undirected_advertise_get_active();
 
     // Add manufacturer data to initial advertising or scan response data, if there is enough space
@@ -280,146 +280,86 @@ void user_catch_rest_hndl(ke_msg_id_t const msgid,
                           ke_task_id_t const dest_id,
                           ke_task_id_t const src_id)
 {
-    switch(msgid)
+    switch (msgid)
     {
-        case CUSTS1_VAL_WRITE_IND:
+    case CUSTS1_VAL_WRITE_IND:
+    {
+        struct custs1_val_write_ind const *msg_param = (struct custs1_val_write_ind const *)(param);
+
+        switch (msg_param->handle)
         {
-            struct custs1_val_write_ind const *msg_param = (struct custs1_val_write_ind const *)(param);
-
-            switch (msg_param->handle)
-            {
-                case SVC1_IDX_CONTROL_POINT_VAL:
-                    user_svc1_ctrl_wr_ind_handler(msgid, msg_param, dest_id, src_id);
-                    break;
-
-                case SVC1_IDX_LED_STATE_VAL:
-                    user_svc1_led_wr_ind_handler(msgid, msg_param, dest_id, src_id);
-                    break;
-
-                case SVC1_IDX_ADC_VAL_1_NTF_CFG:
-                    user_svc1_adc_val_1_cfg_ind_handler(msgid, msg_param, dest_id, src_id);
-                    break;
-
-                case SVC1_IDX_BUTTON_STATE_NTF_CFG:
-                    user_svc1_button_cfg_ind_handler(msgid, msg_param, dest_id, src_id);
-                    break;
-
-                case SVC1_IDX_INDICATEABLE_IND_CFG:
-                    user_svc1_long_val_cfg_ind_handler(msgid, msg_param, dest_id, src_id);
-                    break;
-
-                case SVC1_IDX_LONG_VALUE_NTF_CFG:
-                    user_svc1_long_val_cfg_ind_handler(msgid, msg_param, dest_id, src_id);
-                    break;
-
-                case SVC1_IDX_LONG_VALUE_VAL:
-                    user_svc1_long_val_wr_ind_handler(msgid, msg_param, dest_id, src_id);
-                    break;
-
-                default:
-                    break;
-            }
-        } break;
-
-        case CUSTS1_VAL_NTF_CFM:
-        {
-            struct custs1_val_ntf_cfm const *msg_param = (struct custs1_val_ntf_cfm const *)(param);
-
-            switch (msg_param->handle)
-            {
-                case SVC1_IDX_ADC_VAL_1_VAL:
-                    break;
-
-                case SVC1_IDX_BUTTON_STATE_VAL:
-                    break;
-
-                case SVC1_IDX_LONG_VALUE_VAL:
-                    break;
-
-                default:
-                    break;
-            }
-        } break;
-
-        case CUSTS1_VAL_IND_CFM:
-        {
-            struct custs1_val_ind_cfm const *msg_param = (struct custs1_val_ind_cfm const *)(param);
-
-            switch (msg_param->handle)
-            {
-                case SVC1_IDX_INDICATEABLE_VAL:
-                    break;
-
-                default:
-                    break;
-             }
-        } break;
-
-        case CUSTS1_ATT_INFO_REQ:
-        {
-            struct custs1_att_info_req const *msg_param = (struct custs1_att_info_req const *)param;
-
-            switch (msg_param->att_idx)
-            {
-                case SVC1_IDX_LONG_VALUE_VAL:
-                    user_svc1_long_val_att_info_req_handler(msgid, msg_param, dest_id, src_id);
-                    break;
-
-                default:
-                    user_svc1_rest_att_info_req_handler(msgid, msg_param, dest_id, src_id);
-                    break;
-             }
-        } break;
-
-        case GAPC_PARAM_UPDATED_IND:
-        {
-            // Cast the "param" pointer to the appropriate message structure
-            struct gapc_param_updated_ind const *msg_param = (struct gapc_param_updated_ind const *)(param);
-
-            // Check if updated Conn Params filled to preferred ones
-            if ((msg_param->con_interval >= user_connection_param_conf.intv_min) &&
-                (msg_param->con_interval <= user_connection_param_conf.intv_max) &&
-                (msg_param->con_latency == user_connection_param_conf.latency) &&
-                (msg_param->sup_to == user_connection_param_conf.time_out))
-            {
-            }
-        } break;
-
-        case CUSTS1_VALUE_REQ_IND:
-        {
-            struct custs1_value_req_ind const *msg_param = (struct custs1_value_req_ind const *) param;
-
-            switch (msg_param->att_idx)
-            {
-                case SVC3_IDX_READ_4_VAL:
-                {
-                    user_svc3_read_non_db_val_handler(msgid, msg_param, dest_id, src_id);
-                } break;
-
-                default:
-                {
-                    // Send Error message
-                    struct custs1_value_req_rsp *rsp = KE_MSG_ALLOC(CUSTS1_VALUE_REQ_RSP,
-                                                                    src_id,
-                                                                    dest_id,
-                                                                    custs1_value_req_rsp);
-
-                    // Provide the connection index.
-                    rsp->conidx  = app_env[msg_param->conidx].conidx;
-                    // Provide the attribute index.
-                    rsp->att_idx = msg_param->att_idx;
-                    // Force current length to zero.
-                    rsp->length = 0;
-                    // Set Error status
-                    rsp->status  = ATT_ERR_APP_ERROR;
-                    // Send message
-                    ke_msg_send(rsp);
-                } break;
-             }
-        } break;
+        case UART_PROFILE_TX_VAL:
+            uart_profile_tx_wr_ind_handler(msgid, msg_param, dest_id, src_id);
+            break;
 
         default:
             break;
+        }
+    }
+    break;
+
+    case CUSTS1_VAL_NTF_CFM: break;
+    case CUSTS1_VAL_IND_CFM: break;
+
+    case CUSTS1_ATT_INFO_REQ:
+    {
+        def_att_info_req_handler(msgid, (struct custs1_att_info_req const *)param, dest_id, src_id, ATT_ERR_NO_ERROR);
+    }
+    break;
+
+    case GAPC_PARAM_UPDATED_IND:
+    {
+        // Cast the "param" pointer to the appropriate message structure
+        struct gapc_param_updated_ind const *msg_param = (struct gapc_param_updated_ind const *)(param);
+
+        // Check if updated Conn Params filled to preferred ones
+        if ((msg_param->con_interval >= user_connection_param_conf.intv_min) &&
+            (msg_param->con_interval <= user_connection_param_conf.intv_max) &&
+            (msg_param->con_latency == user_connection_param_conf.latency) &&
+            (msg_param->sup_to == user_connection_param_conf.time_out))
+        {
+        }
+    }
+    break;
+
+    case CUSTS1_VALUE_REQ_IND:
+    {
+        struct custs1_value_req_ind const *msg_param = (struct custs1_value_req_ind const *)param;
+
+        switch (msg_param->att_idx)
+        {
+        case UART_PROFILE_RX_VAL:
+        {
+            uart_profile_rx_val_handler(msgid, msg_param, dest_id, src_id);
+        }
+        break;
+
+        default:
+        {
+            // Send Error message
+            struct custs1_value_req_rsp *rsp = KE_MSG_ALLOC(CUSTS1_VALUE_REQ_RSP,
+                                                            src_id,
+                                                            dest_id,
+                                                            custs1_value_req_rsp);
+
+            // Provide the connection index.
+            rsp->conidx = app_env[msg_param->conidx].conidx;
+            // Provide the attribute index.
+            rsp->att_idx = msg_param->att_idx;
+            // Force current length to zero.
+            rsp->length = 0;
+            // Set Error status
+            rsp->status = ATT_ERR_APP_ERROR;
+            // Send message
+            ke_msg_send(rsp);
+        }
+        break;
+        }
+    }
+    break;
+
+    default:
+        break;
     }
 }
 
