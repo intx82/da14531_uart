@@ -74,7 +74,7 @@
 /* UART1 Driver Implementation. If CFG_UART1_SDK is defined, UART1 ROM driver will be overriden and UART SDK    */
 /* driver will be used, else ROM driver will be used for UART1 module.                                          */
 /****************************************************************************************************************/
-#undef CFG_UART1_SDK
+#define CFG_UART1_SDK
 
 
 /****************************************************************************************************************/

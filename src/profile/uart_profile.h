@@ -20,7 +20,15 @@
 #include "custs1_task.h"
 
 
-/** @brief Service1 Nordic UART impl:  6E400001-B5A3-F393-­E0A9-­E50E24DCCA9E */
+#define UART_TX_PORT GPIO_PORT_0
+#define UART_RX_PORT GPIO_PORT_0
+#define UART_TX_PIN GPIO_PIN_4
+#define UART_RX_PIN GPIO_PIN_5
+#define UART_RX_TIMEOUT 100 // * 10ms
+
+
+
+/** @brief Service1 Nordic UART impl:  6E400001-B5A3-F393­E0A9­E50E24DCCA9E */
 #define UART_PROFILE_UUID_128                                                                          \
     {                                                                                                  \
         0x9e, 0xca, 0xdc, 0x24, 0x0e, 0xe5, 0xa9, 0xe0, 0x93, 0xf3, 0xa3, 0xb5, 0x01, 0x00, 0x40, 0x6e \
@@ -31,7 +39,6 @@
     {                                                                                                  \
         0x9e, 0xca, 0xdc, 0x24, 0x0e, 0xe5, 0xa9, 0xe0, 0x93, 0xf3, 0xa3, 0xb5, 0x02, 0x00, 0x40, 0x6e \
     }
-
 
 /** @brief  UART Nordic RX UUID 6E400003-B5A3-F393-E0A9-E50E24DCCA9E */
 #define UART_PROFILE_RX_UUID_128                                                                       \
@@ -97,5 +104,12 @@ void uart_profile_tx_wr_ind_handler(ke_msg_id_t const msgid, struct custs1_val_w
  */
 void uart_profile_rx_val_handler(ke_msg_id_t const msgid, struct custs1_value_req_ind const *param, ke_task_id_t const dest_id, ke_task_id_t const src_id);
 
+/**
+ ****************************************************************************************
+ * @brief Initialize hardware UART (uart1)
+ * @remark Use P0.4/P0.5 as TX/RX pins; speed 115200 8n1
+ ****************************************************************************************
+*/
+void uart_hw_init(void);
 
 #endif // _UART_PROFILE_H_

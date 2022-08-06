@@ -1,4 +1,4 @@
-;#<FEEDBACK># ARM Linker, 5060960: Last Updated: Sat Aug 06 16:26:43 2022
+;#<FEEDBACK># ARM Linker, 5060960: Last Updated: Sun Aug 07 02:25:19 2022
 ;VERSION 0.2
 ;FILE adc_58x.o
 adc_disable <= USED 0
@@ -251,22 +251,12 @@ syscntl_set_dcdc_vbat3v_level <= USED 0
 SystemCoreClockUpdate <= USED 0
 ;FILE trng.o
 ;FILE uart.o
-uart_baudrate_setf <= USED 0
 uart_disable <= USED 0
 uart_disable_flow_control <= USED 0
-uart_enable <= USED 0
 uart_enable_flow_control <= USED 0
-uart_initialize <= USED 0
-uart_read_buffer <= USED 0
-uart_read_byte <= USED 0
-uart_receive <= USED 0
 uart_register_err_cb <= USED 0
-uart_register_rx_cb <= USED 0
 uart_register_tx_cb <= USED 0
-uart_send <= USED 0
 uart_wait_tx_finish <= USED 0
-uart_write_buffer <= USED 0
-uart_write_byte <= USED 0
 ;FILE uart_profile.o
 ;FILE user_periph_setup.o
 ;FILE user_peripheral.o

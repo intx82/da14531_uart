@@ -164,7 +164,7 @@ static const struct advertise_configuration user_adv_conf = {
 #define USER_ADVERTISE_DATA         ("\x03"\
                                     ADV_TYPE_COMPLETE_LIST_16BIT_SERVICE_IDS\
                                     ADV_UUID_DEVICE_INFORMATION_SERVICE\
-                                    "\x04"\
+                                    "\x11"\
                                     ADV_TYPE_COMPLETE_LIST_128BIT_SERVICE_IDS\
                                     "\x9e\xca\xdc\x24\x0e\xe5\xa9\xe0\x93\xf3\xa3\xb5\x01\x00\x40\x6e")
 
