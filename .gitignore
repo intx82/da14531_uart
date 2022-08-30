@@ -5,3 +5,4 @@ ble_uart.uvguix.*
 JLinkLog.txt
 /src/out/**
 src/EventRecorderStub.scvd
+/tests/out/**
