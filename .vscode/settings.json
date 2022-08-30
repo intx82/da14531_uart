@@ -5,6 +5,7 @@
         "custs1_task.h": "c",
         "gapc_task.h": "c",
         "gapm_task.h": "c",
-        "user_periph_setup.h": "c"
+        "user_periph_setup.h": "c",
+        "cmd_mux.h": "c"
     }
 }
