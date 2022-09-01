@@ -12,8 +12,10 @@
 /**
  * @brief command handler function prototype
  * @param data incoming data from
+ * @param sz Incoming size
+ * @return <0 - exception code, 0 - no response, >0 response size
  */
-typedef size_t (*cmd_hnd_t)(uint8_t* data, size_t sz);
+typedef int16_t (*cmd_hnd_t)(uint8_t* data, size_t sz);
 
 /**
  * @brief cmd list item

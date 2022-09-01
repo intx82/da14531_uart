@@ -4,13 +4,15 @@
 #include <stdint.h>
 #include <stddef.h>
 
-
 #ifndef __weak
 #define __weak __attribute__((weak))
 #endif
 
 #define CMD_OK 0
-#define CMD_ERR_NOT_FOUND -1
+#define CMD_FUNC_NOT_FOUND -1
+#define CMD_ADDR_NOT_FOUND -2
+#define CMD_VAL_INCORRECT -3
+#define CMD_ACK -5
 
 /**
  * @brief Called on read integer
@@ -18,7 +20,7 @@
  * @param var Number of variable
  * @return uint32_t Returned value
  */
-uint32_t on_int_rd(uint32_t var) __weak;
+int8_t on_int_rd(uint16_t var, uint16_t count, uint16_t out[9]) __weak;
 
 /**
  * @brief Called on write integer
@@ -27,7 +29,7 @@ uint32_t on_int_rd(uint32_t var) __weak;
  * @param val Value of variable
  * @return 0 if ok
  */
-int8_t on_int_wr(uint32_t var, uint32_t val) __weak;
+int8_t on_int_wr(uint16_t var, uint16_t val) __weak;
 
 /**
  * @brief Called on blob read
@@ -37,7 +39,6 @@ int8_t on_int_wr(uint32_t var, uint32_t val) __weak;
  */
 void on_blob_rd(uint32_t addr, uint8_t buf[16]) __weak;
 
-
 /**
  * @brief Called on blob write
  * @warning intput data size is 16 bytes, please don't read more
@@ -45,6 +46,5 @@ void on_blob_rd(uint32_t addr, uint8_t buf[16]) __weak;
  * @param buf Output buffer
  */
 int8_t on_blob_wr(uint32_t addr, uint8_t buf[16]) __weak;
-
 
 #endif
