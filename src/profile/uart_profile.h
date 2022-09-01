@@ -15,10 +15,9 @@
 
 #include "attm_db_128.h"
 
-#include "gapc_task.h"                 // gap functions and messages
-#include "gapm_task.h"                 // gap functions and messages
+#include "gapc_task.h" // gap functions and messages
+#include "gapm_task.h" // gap functions and messages
 #include "custs1_task.h"
-
 
 #define UART_TX_PORT GPIO_PORT_0
 #define UART_RX_PORT GPIO_PORT_0
@@ -26,26 +25,30 @@
 #define UART_RX_PIN GPIO_PIN_5
 #define UART_RX_TIMEOUT 100 // * 10ms
 
-
-
-/** @brief Service1 Nordic UART impl:  6E400001-B5A3-F393­E0A9­E50E24DCCA9E */
+/** @brief Service1 Dialog Semi DSPS UART impl: 07b3b03e-8535-b5a07140a304d2495cb7 */
+// nordic 0x9e, 0xca, 0xdc, 0x24, 0x0e, 0xe5, 0xa9, 0xe0, 0x93, 0xf3, 0xa3, 0xb5, 0x01, 0x00, 0x40, 0x6e
 #define UART_PROFILE_UUID_128                                                                          \
     {                                                                                                  \
-        0x9e, 0xca, 0xdc, 0x24, 0x0e, 0xe5, 0xa9, 0xe0, 0x93, 0xf3, 0xa3, 0xb5, 0x01, 0x00, 0x40, 0x6e \
+        0xb7, 0x5c, 0x49, 0xd2, 0x04, 0xa3, 0x40, 0x71, 0xa0, 0xb5, 0x35, 0x85, 0x3e, 0xb0, 0x83, 0x07 \
     }
 
-/** @brief  UART Nordic RX UUID 6E400002-B5A3-F393-E0A9-E50E24DCCA9E */
+/** @brief  UART Dialog Semi DSPS */
 #define UART_PROFILE_TX_UUID_128                                                                       \
     {                                                                                                  \
-        0x9e, 0xca, 0xdc, 0x24, 0x0e, 0xe5, 0xa9, 0xe0, 0x93, 0xf3, 0xa3, 0xb5, 0x02, 0x00, 0x40, 0x6e \
+        0xba, 0x5c, 0x49, 0xd2, 0x04, 0xa3, 0x40, 0x71, 0xa0, 0xb5, 0x35, 0x85, 0x3e, 0xb0, 0x83, 0x07 \
     }
 
-/** @brief  UART Nordic RX UUID 6E400003-B5A3-F393-E0A9-E50E24DCCA9E */
+/** @brief  UART Dialog Semi DSPS */
 #define UART_PROFILE_RX_UUID_128                                                                       \
     {                                                                                                  \
-        0x9e, 0xca, 0xdc, 0x24, 0x0e, 0xe5, 0xa9, 0xe0, 0x93, 0xf3, 0xa3, 0xb5, 0x03, 0x00, 0x40, 0x6e \
+        0xb8, 0x5c, 0x49, 0xd2, 0x04, 0xa3, 0x40, 0x71, 0xa0, 0xb5, 0x35, 0x85, 0x3e, 0xb0, 0x83, 0x07 \
     }
 
+/** @brief  UART Dialog Semi DSPS */
+#define UART_PROFILE_FLOW_UUID_128                                                                     \
+    {                                                                                                  \
+        0xb9, 0x5c, 0x49, 0xd2, 0x04, 0xa3, 0x40, 0x71, 0xa0, 0xb5, 0x35, 0x85, 0x3e, 0xb0, 0x83, 0x07 \
+    }
 
 #define UART_PROFILE_RX_LEN 20
 #define UART_PROFILE_TX_LEN 20
@@ -70,7 +73,6 @@ enum
     UART_PROFILE_IDX_NB
 };
 
-
 /**
  ****************************************************************************************
  * @brief Default value attribute info request handler.
@@ -79,7 +81,7 @@ enum
  * @param[in] dest_id ID of the receiving task instance.
  * @param[in] src_id  ID of the sending task instance.
  ****************************************************************************************
-*/
+ */
 void def_att_info_req_handler(ke_msg_id_t const msgid, struct custs1_att_info_req const *param, ke_task_id_t const dest_id, ke_task_id_t const src_id, uint8_t status);
 
 /**
@@ -90,7 +92,7 @@ void def_att_info_req_handler(ke_msg_id_t const msgid, struct custs1_att_info_re
  * @param[in] dest_id ID of the receiving task instance.
  * @param[in] src_id  ID of the sending task instance.
  ****************************************************************************************
-*/
+ */
 void uart_profile_tx_wr_ind_handler(ke_msg_id_t const msgid, struct custs1_val_write_ind const *param, ke_task_id_t const dest_id, ke_task_id_t const src_id);
 
 /**
@@ -109,7 +111,7 @@ void uart_profile_rx_val_handler(ke_msg_id_t const msgid, struct custs1_value_re
  * @brief Initialize hardware UART (uart1)
  * @remark Use P0.4/P0.5 as TX/RX pins; speed 115200 8n1
  ****************************************************************************************
-*/
+ */
 void uart_hw_init(void);
 
 #endif // _UART_PROFILE_H_
