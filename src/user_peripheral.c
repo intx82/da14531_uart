@@ -205,7 +205,6 @@ void user_app_init(void)
     stored_adv_data_len = USER_ADVERTISE_DATA_LEN;
     memcpy(stored_scan_rsp_data, USER_ADVERTISE_SCAN_RESPONSE_DATA, USER_ADVERTISE_SCAN_RESPONSE_DATA_LEN);
     stored_scan_rsp_data_len = USER_ADVERTISE_SCAN_RESPONSE_DATA_LEN;
-    uart_hw_init();
     default_app_on_init();
 }
 

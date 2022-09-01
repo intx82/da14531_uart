@@ -106,12 +106,5 @@ void uart_profile_tx_wr_ind_handler(ke_msg_id_t const msgid, struct custs1_val_w
  */
 void uart_profile_rx_val_handler(ke_msg_id_t const msgid, struct custs1_value_req_ind const *param, ke_task_id_t const dest_id, ke_task_id_t const src_id);
 
-/**
- ****************************************************************************************
- * @brief Initialize hardware UART (uart1)
- * @remark Use P0.4/P0.5 as TX/RX pins; speed 115200 8n1
- ****************************************************************************************
- */
-void uart_hw_init(void);
 
 #endif // _UART_PROFILE_H_

@@ -48,3 +48,4 @@ void on_blob_rd(uint32_t addr, uint8_t buf[16]) __weak;
 int8_t on_blob_wr(uint32_t addr, uint8_t buf[16]) __weak;
 
 #endif
+

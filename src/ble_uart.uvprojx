@@ -1231,6 +1231,16 @@
               <FileType>1</FileType>
               <FilePath>..\src\user_peripheral.c</FilePath>
             </File>
+            <File>
+              <FileName>cmd_hnd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\cmd_hnd.c</FilePath>
+            </File>
+            <File>
+              <FileName>cmd_mux.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\cmd_mux.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -2460,6 +2470,16 @@
               <FileType>1</FileType>
               <FilePath>..\src\user_peripheral.c</FilePath>
             </File>
+            <File>
+              <FileName>cmd_hnd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\cmd_hnd.c</FilePath>
+            </File>
+            <File>
+              <FileName>cmd_mux.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\cmd_mux.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -3637,6 +3657,16 @@
               <FileName>user_peripheral.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\src\user_peripheral.c</FilePath>
+            </File>
+            <File>
+              <FileName>cmd_hnd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\cmd_hnd.c</FilePath>
+            </File>
+            <File>
+              <FileName>cmd_mux.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\cmd_mux.c</FilePath>
             </File>
           </Files>
         </Group>
