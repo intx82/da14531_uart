@@ -33,7 +33,7 @@ make -C tests
 
 ## Протокол
 
-Протокол общения описан в [doc/protocol.md](https://github.com/intx82/da14531_uart/raw/cmd_mux/doc/protocol.md)
+Протокол общения описан в [doc/protocol.md](https://github.com/intx82/da14531_uart/blob/cmd_mux/doc/protocol.md)
 
 ## Утилита для выполнения команд
 
