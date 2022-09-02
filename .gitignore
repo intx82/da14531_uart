@@ -6,3 +6,7 @@ JLinkLog.txt
 /src/out/**
 src/EventRecorderStub.scvd
 /tests/out/**
+tool/venv_ble/bin/**
+tool/venv_ble/lib/**
+tool/venv_ble/share/**
+tool/venv_ble/lib64
