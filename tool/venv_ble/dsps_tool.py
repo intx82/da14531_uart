@@ -82,7 +82,7 @@ class blob_wr(cmd_t):
         self.data = data
 
     def __repr__(self) -> str:
-        return f'blob_wr: {{ addr: {self.addr}, data: {self.data.hex}}}'
+        return f'blob_wr: {{ addr: {self.addr}, data: {self.data.hex()}}}'
 
 
 def notify_handler(value):
