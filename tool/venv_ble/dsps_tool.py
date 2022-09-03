@@ -36,8 +36,8 @@ class int_rd(cmd_t):
 
     def deserialize(self, inp: bytes):
         super().deserialize(inp)
-        self.count = self.arg[0] / 2
-        self.values = list(struct.unpack('<h'*self.count, bytes(self.arg[1:])))
+        self.count = self.arg[0] // 2
+        self.values = list(struct.unpack('>' +("h"*self.count), bytes(self.arg[1:])))
 
     def __repr__(self) -> str:
         return f'int_rd: {{ var: {self.var}, count: {self.count}, values: {self.values}}}'
@@ -56,8 +56,7 @@ class int_wr(cmd_t):
 class blob_rd(cmd_t):
     def __init__(self, addr: int) -> None:
         addr = int(addr, 16)
-        super().__init__(0x12, struct.pack('ccc', (addr & 0xff).to_bytes(1, 'big'),
-                                           ((addr & 0xff00) >> 8).to_bytes(1, 'big'), (addr >> 16).to_bytes(1, 'big')))
+        super().__init__(0x12, addr.to_bytes(3, 'big'))
         self.addr = addr
         self.data = bytes()
 
@@ -75,9 +74,7 @@ class blob_wr(cmd_t):
         if isinstance(data, str):
             data = bytes.fromhex(data)
 
-        super().__init__(0x13, struct.pack('ccc16s', (addr & 0xff).to_bytes(1, 'big'),
-                                           ((addr & 0xff00) >> 8).to_bytes(
-                                               1, 'big'), (addr >> 16).to_bytes(1, 'big'), data))
+        super().__init__(0x13, struct.pack('3s16s', addr.to_bytes(3, 'big'), data))
         self.addr = addr
         self.data = data
 
