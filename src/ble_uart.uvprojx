@@ -1241,6 +1241,16 @@
               <FileType>1</FileType>
               <FilePath>.\cmd_mux.c</FilePath>
             </File>
+            <File>
+              <FileName>test_hnd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\test_hnd.c</FilePath>
+            </File>
+            <File>
+              <FileName>test_hnd.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\test_hnd.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -2480,6 +2490,16 @@
               <FileType>1</FileType>
               <FilePath>.\cmd_mux.c</FilePath>
             </File>
+            <File>
+              <FileName>test_hnd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\test_hnd.c</FilePath>
+            </File>
+            <File>
+              <FileName>test_hnd.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\test_hnd.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -3667,6 +3687,16 @@
               <FileName>cmd_mux.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\cmd_mux.c</FilePath>
+            </File>
+            <File>
+              <FileName>test_hnd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\test_hnd.c</FilePath>
+            </File>
+            <File>
+              <FileName>test_hnd.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\test_hnd.h</FilePath>
             </File>
           </Files>
         </Group>

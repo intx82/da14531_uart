@@ -1,4 +1,4 @@
-;#<FEEDBACK># ARM Linker, 5060960: Last Updated: Thu Sep 01 20:00:30 2022
+;#<FEEDBACK># ARM Linker, 5060960: Last Updated: Sat Sep 03 22:55:48 2022
 ;VERSION 0.2
 ;FILE adc_58x.o
 adc_disable <= USED 0
@@ -251,6 +251,7 @@ spi_flash_write_status_reg <= USED 0
 syscntl_set_dcdc_vbat3v_level <= USED 0
 ;FILE system_da14585_586.o
 SystemCoreClockUpdate <= USED 0
+;FILE test_hnd.o
 ;FILE trng.o
 ;FILE uart.o
 uart_baudrate_setf <= USED 0

@@ -5,7 +5,21 @@
 #include <stddef.h>
 
 #ifndef __weak
+#ifdef __GNUC__
 #define __weak __attribute__((weak))
+#elif __UVISION_VERSION
+#define __weak __WEAK
+#endif
+#endif
+
+#ifdef __UVISION_VERSION
+    #include "co_endian.h" 
+    #define htonl(A) co_ntohl(A)
+    #define htons(A) co_ntohs(A)
+    #define ntohs(A) co_ntohs(A)
+    #define ntohl(A) co_ntohl(A)
+#elif __GNUC__
+    #include <arpa/inet.h>
 #endif
 
 #define CMD_OK 0
@@ -14,10 +28,13 @@
 #define CMD_VAL_INCORRECT -3
 #define CMD_ACK -5
 
+#ifdef __GNUC__
 /**
  * @brief Called on read integer
  *
  * @param var Number of variable
+ * @param count count of variables to read
+ * @param out output variables list (up to 9 items in a row)
  * @return uint32_t Returned value
  */
 int8_t on_int_rd(uint16_t var, uint16_t count, uint16_t out[9]) __weak;
@@ -46,6 +63,8 @@ void on_blob_rd(uint32_t addr, uint8_t buf[16]) __weak;
  * @param buf Output buffer
  */
 int8_t on_blob_wr(uint32_t addr, uint8_t buf[16]) __weak;
+
+#endif
 
 #endif
 

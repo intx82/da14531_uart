@@ -16,7 +16,7 @@ void hex(uint8_t *str, size_t len)
 int8_t on_int_rd(uint16_t var, uint16_t count, uint16_t out[9])
 {
     printf("on_int_rd: var: %x, count: %x \r\n", var, count);
-    assert(var == 0x55aa);
+    assert(var == 0xaa55);
     assert(count == 2);
 
     out[0] = 0xabcd;
@@ -27,7 +27,7 @@ int8_t on_int_rd(uint16_t var, uint16_t count, uint16_t out[9])
 
 void __int_rd_test(void)
 {
-    uint8_t __int_rd_tst[] = {0x03, 0xaa, 0x55, 0x02, 0x00, 0x00};
+    uint8_t __int_rd_tst[] = {0x03, 0xaa, 0x55, 0x00, 0x02, 0x00};
     size_t __int_rd_sz = 5;
     cmd_mux(__int_rd_tst, &__int_rd_sz);
 
