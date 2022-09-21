@@ -10,3 +10,13 @@ tool/venv_ble/bin/**
 tool/venv_ble/lib/**
 tool/venv_ble/share/**
 tool/venv_ble/lib64
+/src/secondary_bootloader/out*
+/src/secondary_bootloader/out_DA14585/**
+/src/secondary_bootloader/*.intl
+/src/secondary_bootloader/bin
+*.intl
+*.crf
+*.d
+*.o
+*.dep
+*.lnp
