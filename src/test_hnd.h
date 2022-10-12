@@ -5,6 +5,11 @@
 #include <stddef.h>
 
 /**
+* @brief Initialize systick, etc
+*/
+void test_hnd_init(void);
+
+/**
  * @brief Called on read integer
  *
  * @param var Number of variable

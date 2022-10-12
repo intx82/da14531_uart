@@ -34,6 +34,17 @@
  ****************************************************************************************
  */
 
+#ifndef PRODUCT_HEADER_POSITION
+#if defined (__DA14531__)
+#define PRODUCT_HEADER_POSITION     0x1F000
+#else
+#define PRODUCT_HEADER_POSITION     0x38000
+#endif
+#endif
+
+#define CFG1_DEFAULT_POSITION 0x39000
+#define CFG2_DEFAULT_POSITION 0x3A000
+
 /****************************************************************************************/
 /* UART2 configuration                                                                  */
 /****************************************************************************************/
@@ -93,11 +104,27 @@
     #define SPI_CLK_PIN             GPIO_PIN_0
 
     #define SPI_DO_PORT             GPIO_PORT_0
-    #define SPI_DO_PIN              GPIO_PIN_6
+    #define SPI_DO_PIN              GPIO_PIN_5
 
     #define SPI_DI_PORT             GPIO_PORT_0
-    #define SPI_DI_PIN              GPIO_PIN_5
+    #define SPI_DI_PIN              GPIO_PIN_6
 #endif
+
+// Define SPI Configuration
+#define SPI_MS_MODE             SPI_MS_MODE_MASTER
+#define SPI_CP_MODE             SPI_CP_MODE_0
+#define SPI_WSZ                 SPI_MODE_8BIT
+#define SPI_CS                  SPI_CS_0
+
+#if defined(__DA14531__)
+    #define SPI_SPEED_MODE          SPI_SPEED_MODE_4MHz
+    #define SPI_EDGE_CAPTURE        SPI_MASTER_EDGE_CAPTURE
+#else // (DA14585, DA14586)
+    #define SPI_SPEED_MODE          SPI_SPEED_MODE_2MHz
+#endif
+
+#define SPI_FLASH_DEV_SIZE SPI_FLASH_MBIT_SIZE(8)
+#define SPI_FLASH_MBIT_SIZE(MBIT) (MBIT * 131072)
 
 /***************************************************************************************/
 /* Production debug output configuration                                               */
@@ -112,6 +139,14 @@
 #endif
 #endif
 
+
+
+#define SPI_FLASH_GPIO_MAP   ((uint32_t)SPI_CLK_PIN | ((uint32_t)SPI_CLK_PORT << 4) | \
+                        ((uint32_t)SPI_EN_PIN << 8) | ((uint32_t)SPI_EN_PORT << 12) | \
+                        ((uint32_t)SPI_DO_PIN << 16) | ((uint32_t)SPI_DO_PORT << 20) | \
+                        ((uint32_t)SPI_DI_PIN << 24) | ((uint32_t)SPI_DI_PORT << 28))
+                        
+#define CFG_CONFIG_STORAGE 1
 
 /*
  * FUNCTION DECLARATIONS
@@ -146,5 +181,45 @@ void set_pad_functions(void);
  */
 void periph_init(void);
 
+
+#if (!SUOTAR_SPI_DISABLE) || defined CFG_CONFIG_STORAGE
+/**
+ ****************************************************************************************
+ * @brief Initializes the SPI to access the flash.
+ * @param[in] gpio_map  Bitmap of the GPIOs to be used
+ * @return void
+ ****************************************************************************************
+ */
+void user_spi_flash_init(uint32_t gpio_map);
+
+/**
+ ****************************************************************************************
+ * @brief Powers down the flash and releases the SPI controller.
+ * @return void
+ ****************************************************************************************
+ */
+void user_spi_flash_release(void);
+
+/**
+ ****************************************************************************************
+ * @brief Erases sectors of the flash. This functions can erase whole sectors, not part of it.
+ * @param[in] starting_address  The address in the flash where we want to erase.
+ * @param[in] size              Size of data we want to erase.
+ * @return 0 if success, else error code.
+ ****************************************************************************************
+ */
+int8_t user_erase_flash_sectors(uint32_t starting_address, uint32_t size);
+
+/**
+ ****************************************************************************************
+ * @brief Writes data to flash.
+ * @param[in] data      Pointer to the data to be written.
+ * @param[in] address   Address in the flash.
+ * @param[in] size      Size of data we want to write.
+ * @return 0 if success, else error code.
+ ****************************************************************************************
+ */
+int32_t user_flash_write_data (uint8_t *data, uint32_t address, uint32_t size);
+#endif
 
 #endif // _USER_PERIPH_SETUP_H_

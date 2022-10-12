@@ -936,6 +936,11 @@
               <FileType>1</FileType>
               <FilePath>.\..\sdk\platform\driver\dma\dma.c</FilePath>
             </File>
+            <File>
+              <FileName>systick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\sdk\platform\driver\systick\systick.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1186,6 +1191,21 @@
               <FileType>5</FileType>
               <FilePath>..\src\config\user_profiles_config.h</FilePath>
             </File>
+            <File>
+              <FileName>user_config_storage.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\user_config_storage.c</FilePath>
+            </File>
+            <File>
+              <FileName>user_config_storage.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\user_config_storage.h</FilePath>
+            </File>
+            <File>
+              <FileName>user_config_common.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\user_config_common.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1250,6 +1270,11 @@
               <FileName>test_hnd.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\test_hnd.h</FilePath>
+            </File>
+            <File>
+              <FileName>version.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\version.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2185,6 +2210,11 @@
               <FileType>1</FileType>
               <FilePath>.\..\sdk\platform\driver\dma\dma.c</FilePath>
             </File>
+            <File>
+              <FileName>systick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\sdk\platform\driver\systick\systick.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2435,6 +2465,21 @@
               <FileType>5</FileType>
               <FilePath>..\src\config\user_profiles_config.h</FilePath>
             </File>
+            <File>
+              <FileName>user_config_storage.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\user_config_storage.c</FilePath>
+            </File>
+            <File>
+              <FileName>user_config_storage.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\user_config_storage.h</FilePath>
+            </File>
+            <File>
+              <FileName>user_config_common.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\user_config_common.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2499,6 +2544,11 @@
               <FileName>test_hnd.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\test_hnd.h</FilePath>
+            </File>
+            <File>
+              <FileName>version.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\version.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -3383,6 +3433,11 @@
               <FileType>1</FileType>
               <FilePath>.\..\sdk\platform\driver\dma\dma.c</FilePath>
             </File>
+            <File>
+              <FileName>systick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\sdk\platform\driver\systick\systick.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3633,6 +3688,21 @@
               <FileType>5</FileType>
               <FilePath>..\src\config\user_profiles_config.h</FilePath>
             </File>
+            <File>
+              <FileName>user_config_storage.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\user_config_storage.c</FilePath>
+            </File>
+            <File>
+              <FileName>user_config_storage.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\user_config_storage.h</FilePath>
+            </File>
+            <File>
+              <FileName>user_config_common.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\user_config_common.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3697,6 +3767,11 @@
               <FileName>test_hnd.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\test_hnd.h</FilePath>
+            </File>
+            <File>
+              <FileName>version.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\version.h</FilePath>
             </File>
           </Files>
         </Group>

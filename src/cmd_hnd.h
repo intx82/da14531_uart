@@ -13,13 +13,13 @@
 #endif
 
 #ifdef __UVISION_VERSION
-    #include "co_endian.h" 
-    #define htonl(A) co_ntohl(A)
-    #define htons(A) co_ntohs(A)
-    #define ntohs(A) co_ntohs(A)
-    #define ntohl(A) co_ntohl(A)
+#include "co_endian.h"
+#define htonl(A) co_ntohl(A)
+#define htons(A) co_ntohs(A)
+#define ntohs(A) co_ntohs(A)
+#define ntohl(A) co_ntohl(A)
 #elif __GNUC__
-    #include <arpa/inet.h>
+#include <arpa/inet.h>
 #endif
 
 #define CMD_OK 0
@@ -67,4 +67,3 @@ int8_t on_blob_wr(uint32_t addr, uint8_t buf[16]) __weak;
 #endif
 
 #endif
-
