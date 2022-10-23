@@ -1,4 +1,4 @@
-;#<FEEDBACK># ARM Linker, 5060960: Last Updated: Thu Oct 13 00:08:15 2022
+;#<FEEDBACK># ARM Linker, 5060960: Last Updated: Thu Oct 20 03:02:09 2022
 ;VERSION 0.2
 ;FILE adc_58x.o
 adc_disable <= USED 0
@@ -90,13 +90,11 @@ battery_get_lvl <= USED 0
 ;FILE gpio.o
 GPIO_ConfigurePinPower <= USED 0
 GPIO_DisablePorPin <= USED 0
-GPIO_EnableIRQ <= USED 0
 GPIO_EnablePorPin <= USED 0
 GPIO_GetIRQInputLevel <= USED 0
 GPIO_GetPinFunction <= USED 0
 GPIO_GetPinStatus <= USED 0
 GPIO_GetPorTime <= USED 0
-GPIO_RegisterCallback <= USED 0
 GPIO_SetIRQInputLevel <= USED 0
 GPIO_SetPorTime <= USED 0
 GPIO_is_valid <= USED 0

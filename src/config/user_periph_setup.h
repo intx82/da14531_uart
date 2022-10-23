@@ -34,6 +34,9 @@
  ****************************************************************************************
  */
 
+#define LIGHT_SENSOR_GPIO_PORT GPIO_PORT_0
+#define LIGHT_SENSOR_GPIO_PIN GPIO_PIN_7
+
 #ifndef PRODUCT_HEADER_POSITION
 #if defined (__DA14531__)
 #define PRODUCT_HEADER_POSITION     0x1F000
