@@ -45,6 +45,8 @@ $ . venv_ble/bin/activate
 $ pip3 install BLE_GATT
 ```
 
+Для запуска утилиты надо добавить устройство через gattool (`sudo gatttool -t random -I -b 00:13:43:A3:6F:56`)
+
 Утилита запускается с следующими аргументами:
 
 ```

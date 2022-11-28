@@ -21,3 +21,5 @@ tool/venv_ble/lib64
 *.dep
 *.lnp
 out/*
+
+tool/venv_ble/__pycache__/**

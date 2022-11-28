@@ -55,7 +55,8 @@ class int_wr(cmd_t):
 
 class blob_rd(cmd_t):
     def __init__(self, addr: int) -> None:
-        addr = int(addr, 16)
+        if isinstance(addr, str):
+            addr = int(addr, 16)
         super().__init__(0x12, addr.to_bytes(3, 'big'))
         self.addr = addr
         self.data = bytes()
@@ -66,6 +67,28 @@ class blob_rd(cmd_t):
     def deserialize(self, inp: bytes):
         super().deserialize(inp)
         self.data = bytes(self.arg[3:])
+
+class blob_rd240(cmd_t):
+    def __init__(self, addr: int, sz: int) -> None:
+        if isinstance(addr, str):
+            addr = int(addr, 16)
+
+        sz = int(sz)
+
+        if sz > 240: 
+            sz = 240
+
+        super().__init__(0x14, struct.pack('>3sB', addr.to_bytes(3, 'big'), sz) )
+        self.addr = addr
+        self.sz = sz
+        self.data = bytes()
+
+    def __repr__(self) -> str:
+        return f'blob_rd240: {{ addr: {self.addr}, sz: {self.sz} data: {self.data.hex()}}}'
+
+    def deserialize(self, inp: bytes):
+        super().deserialize(inp)
+        self.data = bytes(self.arg[4:self.arg[3]])
 
 
 class blob_wr(cmd_t):
@@ -117,3 +140,5 @@ if __name__ == '__main__':
             dev.wait_for_notifications()
         finally:
             dev.disconnect()
+    else:
+        print(f'{sys.argv[0]} [mac] [INT_RD/INT_WR/BLOB_RD/BLOB_WR/BLOB_RD240] [...args]')
